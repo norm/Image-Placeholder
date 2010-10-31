@@ -1,5 +1,5 @@
 use Modern::Perl;
-use Test::More      tests => 8;
+use Test::More      tests => 12;
 
 use Image::Placeholder;
 
@@ -24,4 +24,14 @@ use Image::Placeholder;
     my $img = Image::Placeholder->new( width => 450 );
     ok( 450 == $img->get_width,  'width is 450' );
     ok( 450 == $img->get_height, 'no height gets the width (450)' );
+}
+{
+    my $img = Image::Placeholder->new( width => -1, height => -1 );
+    ok( 300 == $img->get_width,  'negative widths are 300' );
+    ok( 300 == $img->get_height, 'negative heights are 300' );
+}
+{
+    my $img = Image::Placeholder->new( width => 0 );
+    ok( 300 == $img->get_width,  'zero widths are 300' );
+    ok( 300 == $img->get_height, 'zero heights are 300' );
 }
