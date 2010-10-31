@@ -1,0 +1,38 @@
+{{
+
+@examples = (
+  '/fcc/c33/none/120x600.png',
+      'placeholder, 120 by 600 with a red background and no text',
+      '',
+  '/fda/ca8/f60/170x170.png',
+      'example placeholder at 170 by 170 with an orange background',
+      '',
+  '/afa/none/000/170x170.png',
+      'example placeholder at 170 by 170 with a green background and no lines',
+      '',
+  '/transparent/none/fff/Transparent-350x160.png',
+      'example placeholder at 350 by 160 with a transparent background',
+      'transparent',
+  '/b9f/none/fff/medium%20rectangle-350x250.png',
+      'example placeholder at 350 by 250 with a blue background and the text "medium rectangle"',
+      '',
+);
+
+}}
+
+<ul id='examples'>
+  <li class='stripe'><img src='/333/none/none/500x100.png' alt=''></li>
+{{
+  my $count = 0;
+  while ( defined $examples[$count] ) {
+      my $url   = $examples[$count++];
+      my $alt   = $examples[$count++];
+      my $class = $examples[$count++];
+      
+      $class = " class='${class}'";
+}}
+  <li${class}><a href='${url}'><img src='${url}' alt='${alt}'></a></li>
+{{
+  }
+}}
+</ul>
