@@ -92,3 +92,8 @@ input[type=text] {
     padding:                2px 5px;
 }
 
+
+#page-404 img {
+    display:                block;
+    margin:                 0 auto;
+}
