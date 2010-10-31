@@ -45,6 +45,9 @@ sub get_result {
                 if $path =~ m{\.png$};
         }
         
+        return redirect_to_image( $req )
+            if '/create' eq $path && 'POST' eq $req->method;
+        
         return generate_404();
     };
 }
@@ -83,6 +86,41 @@ sub parse_url {
     }
     
     return;
+}
+sub redirect_to_image {
+    my $req = shift;
+    
+    my $host   = $req->base;
+    my $text   = $req->param( 'text' )              // '';
+    my $tcol   = $req->param( 'text_colour' )       // '';
+    my $lcol   = $req->param( 'line_colour' )       // '';
+    my $bcol   = $req->param( 'background_colour' ) // '';
+    my $width  = $req->param( 'width' )             // 300;
+    my $height = $req->param( 'height' )            // 300;
+    
+    # fill in the default values if not provided and a later
+    # part of the URL has been specified
+    $tcol = '36f' if !length $tcol && length $text;
+    $lcol = '444' if !length $lcol && length $tcol;
+    $bcol = 'ddd' if !length $bcol && length $lcol;
+    
+    $width  = 300    unless $width  =~ m{^\d+$};
+    $height = $width unless $height =~ m{^\d+$};
+    
+    my $size = sprintf '%s%sx%s',
+                    ( length $text ? "${text}-" : '' ),
+                    $width,
+                    ( length $height ? $height : $width );
+    
+    my $path = join( '/', '', $bcol, $lcol, $tcol, $size ) . '.png';
+    $path =~ s{/+}{/}gs;
+    $path =~ s{^/}{};
+    
+    return [
+        301,
+        [ 'Location' => "${host}${path}", ],
+        [],
+    ];
 }
 sub generate_image {
     my %args  = @_;
