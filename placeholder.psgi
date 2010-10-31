@@ -87,7 +87,7 @@ sub parse_url {
         $match{'text'} = uri_unescape( $match{'text'} )
             if defined $+{'text'};
         
-        if ( $match{'background_colour'} eq 'transparent' ) {
+        if ( ( $match{'background_colour'} // '' ) eq 'transparent' ) {
             delete $match{'background_colour'};
             $match{'transparent'} = 1;
         }
