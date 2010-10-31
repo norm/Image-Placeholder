@@ -10,15 +10,17 @@ use Plack::Request;
 use Text::Intermixed;
 use Text::SimpleTemplate;
 use URI::Escape;
+use Plack::Middleware::ConditionalGET;
 
 use constant MAX_IMAGE_DIMENSION => 2047;
+use constant ETAG_VALUE          => '2';
 
 
 
 my $templates = Text::SimpleTemplate->new( base_dir => 'templates' );
 
 my $static  = Plack::App::File->new( root => 'site' )->to_app;
-my $dynamic = get_result();
+my $dynamic = Plack::Middleware::ConditionalGET->wrap( get_result() );
 
 # serve up static files by preference if they exist
 my $cascade = Plack::App::Cascade->new();
@@ -138,6 +140,7 @@ sub generate_image {
         200,
         [
             'Content-Type', 'image/png',
+            'ETag',         ETAG_VALUE,
         ],
         [ $image->generate(), ],
     ];
