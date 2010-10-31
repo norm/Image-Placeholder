@@ -1,0 +1,94 @@
+/* -*- Mode: CSS; tab-width: 4; indent-tabs-mode: nil; -*- */
+
+@import url(http://yui.yahooapis.com/2.8.2r1/build/reset/reset-min.css);
+
+body {
+    font-family:            "Hoefler Text",
+                            "Georgia",
+                            serif;
+    margin:                 0;
+    padding:                40px;
+}
+
+#logo {
+    font-size:              3em;
+    color:                  #26f;
+    margin-bottom:          0.75em;
+}
+h1,
+h2,
+input[type=text] {
+    font-family:            "Helvetica Neue",
+                            "Arial", 
+                            "Helvetica",
+                            serif;
+}
+a {
+    color:                  #26f;
+}
+a:visited {
+    color:                  #04c;
+}
+
+#examples {
+    width:                  490px;
+    background:             #666;
+    float:                  right;
+    position:               relative;
+    margin-left:            25px;
+    margin-bottom:          25px;
+    padding:                0 10px 10px 0;
+}
+#examples:after {
+    content:                ".";
+    display:                block;
+    height:                 0;
+    clear:                  both;
+    visibility:             hidden;
+}
+#examples li {
+    position:               relative;
+    z-index:                2;
+    float:                  left;
+    margin:                 0;
+    padding:                0;
+}
+#examples li img {
+    display:                block;
+    margin-left:            10px;
+    margin-top:             10px;
+}
+#examples li.stripe {
+    position:               absolute;
+    top:                    210px;
+    left:                   0;
+    margin-left:            -10px;
+    z-index:                1;
+}
+#examples li.transparent img {
+    outline:                1px solid rgba( 255, 255, 255, 0.5 );
+}
+
+label {
+    display:                block;
+    margin-top:             0.25em;
+}
+input[type=submit] {
+    background:             #26f;
+    display:                block;
+    margin-top:             0.25em;
+    color:                  #fff;
+    border:                 none;
+    -webkit-border-radius:  5px;
+    -moz-border-radius:     5px;
+    border-radius:          5px;
+    font-size:              1.25em;
+    padding:                5px 5px 2px;
+    cursor:                 pointer;
+}
+input[type=text] {
+    border:                 none;
+    background:             #ddf;
+    padding:                2px 5px;
+}
+
