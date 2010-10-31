@@ -1,0 +1,31 @@
+<p>
+  Image placeholders generated automatically from the URL.
+  Edit the location and save the resulting image, or use <code>curl</code>.
+  The URL contains the following parts, of which only the size
+  is not optional.
+</p>
+<ul class='list'>
+  <li>the hex value for the background colour (or <code>transparent</code>)</li>
+  <li>the hex value for the line colour (or <code>none</code>)</li>
+  <li>the hex value for the text colour (or <code>none</code>)</li>
+  <li>text to use instead of the default</li>
+  <li>the size of the image</li>
+</ul>
+
+<h2>Example URLs</h2>
+<ul class='list'>
+{{
+  @examples = (
+          '/400x200.png',
+          '/Placeholder-400x200.png',
+          '/transparent/400x200.png',
+          '/fff/none/400x200.png',
+          '/020202/fff/none/400x200.png',
+      );
+  foreach my $url ( @examples ) {
+}}
+  <li><a href='${url}'><code>${url}</code></a></li>
+{{
+  }
+}}
+</ul>

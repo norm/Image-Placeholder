@@ -23,11 +23,19 @@ input[type=text] {
                             "Helvetica",
                             serif;
 }
+h2 {
+    margin:                 2em 0 1em;
+}
 a {
     color:                  #26f;
 }
 a:visited {
     color:                  #04c;
+}
+
+#content p {
+    line-height:            1.2;
+    margin-bottom:          1em;
 }
 
 #examples {
@@ -92,6 +100,25 @@ input[type=text] {
     padding:                2px 5px;
 }
 
+#content .list {
+    margin-bottom:          0.25em;
+}
+#content .list li {
+    list-style:             square outside;
+    margin-bottom:          0.25em;
+}
+#content code,
+#content a code {
+    color:                  #333;
+}
+#content a code {
+    background:             #ddd;
+}
+#content a:hover code,
+#content a:focus code {
+    color:                  #fff;
+    background:             #333;
+}
 
 #page-404 img {
     display:                block;
