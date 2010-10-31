@@ -11,6 +11,8 @@ use Text::Intermixed;
 use Text::SimpleTemplate;
 use URI::Escape;
 
+use constant MAX_IMAGE_DIMENSION => 2047;
+
 
 
 my $templates = Text::SimpleTemplate->new( base_dir => 'templates' );
@@ -73,6 +75,12 @@ sub parse_url {
     
     if ( $url =~ m{$options}ix ) {
         my %match = %+;
+        
+        # let's not go crazy with image sizes
+        return
+            if ( $match{'width'} > MAX_IMAGE_DIMENSION );
+        return
+            if ( $match{'height'} > MAX_IMAGE_DIMENSION );
         
         $match{'text'} = uri_unescape( $match{'text'} )
             if defined $+{'text'};
