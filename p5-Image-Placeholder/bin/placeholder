@@ -1,0 +1,92 @@
+#!/usr/bin/env perl
+
+use Modern::Perl;
+
+use Getopt::Long;
+use Image::Placeholder;
+use Pod::Usage;
+
+
+
+my %options = get_options_or_exit();
+my $size    = shift;
+my $text    = shift;
+
+$options{'size'} = $size
+    if defined $size;
+$options{'text'} = $text
+    if defined $text;
+
+my $image = Image::Placeholder->new( %options );
+print $image->generate();
+exit;
+
+
+
+
+
+sub get_options_or_exit {
+    my @options = qw(
+                  transparent|a
+            background-colour|b=s
+                         font|f=s
+                  line-colour|l=s
+                         help|h
+                output-format|o=s
+                  text-colour|t=s
+                        width|x=i
+                       height|y=i
+        );
+    my %mappings = (
+            'background-colour' => 'background_colour',
+            'line-colour'       => 'line_colour',
+            'text-colour'       => 'text_colour',
+        );
+    
+    my %getopts;
+    my %options;
+    
+    my $known = GetOptions( \%getopts, @options );
+    pod2usage() 
+        if !$known or $getopts{'help'};
+    
+    while ( my( $key, $value ) = each %getopts ) {
+        my $use_key = $mappings{ $key } // $key;
+        $options{ $use_key } = $value;
+    }
+    
+    return %options;
+}
+
+__END__
+
+=head1 NAME
+
+B<placeholder> - generate placeholder images
+
+=head1 SYNOPSIS
+
+B<placeholder> [B<-f>]
+
+=head1 DESCRPTION
+
+=head1 OPTIONS
+
+=head1 SEE ALSO
+
+=over
+
+=item perldoc L<Image::Placeholder>
+
+=back
+
+=head1 AUTHOR
+
+Mark Norman Francis, L<norm@cackhanded.net>.
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright 2010 Mark Norman Francis.
+
+This library is free software; you can redistribute it and/or modify it
+under the same terms as Perl itself.
