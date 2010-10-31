@@ -9,6 +9,10 @@ has height => (
     isa     => 'Int',
     is      => 'ro',
 );
+has size => (
+    isa => 'Str',
+    is  => 'ro',
+);
 has text => (
     isa     => 'Str',
     is      => 'rw',
@@ -20,6 +24,9 @@ has width => (
 );
 
 method BUILD {
+    $self->set_size_from_string( $self->get_size() )
+        if defined $self->get_size();
+    
     $self->{'height'} = $self->get_width()
         unless defined $self->get_height();
     
@@ -36,6 +43,21 @@ method set_default_text {
     my $size = sprintf '%s×%s', $self->get_width(), $self->get_height();
     $self->set_text( $size );
 }
+method set_size_from_string ( Str $size ) {
+    my $width_by_height = qr{
+            ^
+            ( \d+ )
+            x
+            ( \d+ )
+            $
+        }x;
+    
+    if ( $size =~ $width_by_height ) {
+        $self->{'width'}  = $1;
+        $self->{'height'} = $2;
+    }
+}
+
 method rgb_to_hex ( Str $hex ) {
     # TODO lookup standard colour values
     
