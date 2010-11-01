@@ -308,7 +308,7 @@ C<000000> and white is C<FFFFFF>.
 CSS-style 3-character shorthand is also accepted where the three
 channels are repeating characters. So black is also C<000> and white
 C<FFF>.  All three values have to be repeating, so a value such as
-C<080808> cannot be shorted.
+C<080808> cannot be shortened.
 
 
 =head1 SEE ALSO
