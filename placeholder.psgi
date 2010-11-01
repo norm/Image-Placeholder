@@ -3,14 +3,16 @@
 use Modern::Perl;
 
 use Encode;
+use Image::Placeholder;
 use Plack::App::Cascade;
 use Plack::App::File;
-use Image::Placeholder;
+use Plack::Builder;
+use Plack::Middleware::ConditionalGET;
+use Plack::Middleware::Expires;
 use Plack::Request;
 use Text::Intermixed;
 use Text::SimpleTemplate;
 use URI::Escape;
-use Plack::Middleware::ConditionalGET;
 
 use constant MAX_IMAGE_DIMENSION => 2047;
 use constant ETAG_VALUE          => '2';
@@ -20,7 +22,17 @@ use constant ETAG_VALUE          => '2';
 my $templates = Text::SimpleTemplate->new( base_dir => 'templates' );
 
 my $static  = Plack::App::File->new( root => 'site' )->to_app;
-my $dynamic = Plack::Middleware::ConditionalGET->wrap( get_result() );
+my $dynamic = get_result();
+my $builder = Plack::Builder->new();
+
+$builder->add_middleware( 'ConditionalGET' );
+$builder->add_middleware( 
+        'Expires', 
+        content_type => qr{^image/},
+        expires      => 'access plus 3 months',
+    );
+$dynamic = $builder->mount( '/' => $dynamic );
+$dynamic = $builder->to_app( $dynamic );
 
 # serve up static files by preference if they exist
 my $cascade = Plack::App::Cascade->new();
