@@ -7,8 +7,6 @@ use Image::Placeholder;
 use Plack::App::Cascade;
 use Plack::App::File;
 use Plack::Builder;
-use Plack::Middleware::ConditionalGET;
-use Plack::Middleware::Expires;
 use Plack::Request;
 use Text::Intermixed;
 use Text::SimpleTemplate;
@@ -25,6 +23,7 @@ my $static  = Plack::App::File->new( root => 'site' )->to_app;
 my $dynamic = get_result();
 my $builder = Plack::Builder->new();
 
+$builder->add_middleware( 'ContentLength' );
 $builder->add_middleware( 'ConditionalGET' );
 $builder->add_middleware( 
         'Expires', 
