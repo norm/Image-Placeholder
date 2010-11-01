@@ -84,7 +84,7 @@ sub parse_url {
               \.
               (?'format' png )
             $
-        }x;
+        }xi;
     
     if ( $url =~ m{$options}ix ) {
         my %match = %+;
@@ -98,7 +98,7 @@ sub parse_url {
         $match{'text'} = uri_unescape( $match{'text'} )
             if defined $+{'text'};
         
-        if ( ( $match{'background_colour'} // '' ) eq 'transparent' ) {
+        if ( lc( $match{'background_colour'} // '' ) eq 'transparent' ) {
             delete $match{'background_colour'};
             $match{'transparent'} = 1;
         }

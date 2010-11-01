@@ -100,14 +100,14 @@ method generate {
     # draw the border and cross
     $image->fill( 0, 0, $self->{'_background'} );
     
-    if ( $self->get_line_colour ne 'none' ) {
+    if ( lc( $self->get_line_colour ) ne 'none' ) {
         $image->setAntiAliased( $line );
         $image->line( 0, 0, $x, $y, gdAntiAliased );
         $image->line( $x, 0, 0, $y, gdAntiAliased );
         $image->rectangle( 0, 0, $x, $y, $line );
     }
     
-    if ( $self->get_text_colour ne 'none' ) {
+    if ( lc( $self->get_text_colour ) ne 'none' ) {
         # work out where (indeed, if) the text fits
         my( $twidth, $theight, $tdropheight, $point_size )
             = $self->get_text_offset();
