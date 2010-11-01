@@ -6,6 +6,8 @@ use MooseX::Method::Signatures;
 use MooseX::FollowPBP;
 
 use GD;
+use version;
+our $VERSION = qv( 1.0.0 );
 
 use constant TRUE_COLOUR      => 1;
 use constant MAX_TRANSPARENCY => 127;
@@ -225,7 +227,7 @@ __END__
 
 =head1 NAME
 
-B<Image::Placeholder> - generate images for use as placeholders
+Image::Placeholder - generate images for use as placeholders
 
 =head1 SYNOPSIS
 
