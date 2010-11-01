@@ -220,3 +220,116 @@ method rgb_to_hex ( Str $hex ) {
 }
 
 1;
+
+__END__
+
+=head1 NAME
+
+B<Image::Placeholder> - generate images for use as placeholders
+
+=head1 SYNOPSIS
+
+    use Image::Placeholder;
+    my $image = Image::Placeholder->new(
+            width             => 300,
+            height            => 250,
+            background_colour => 'ccc',
+            line_colour       => 'none',
+            font              => 'Gill Sans',
+            text              => 'IAB MRec',
+        );
+    print $image->generate();
+
+
+=head1 OPTIONS
+
+The B<new()> method accepts a hash of options to control the size
+and appearance of the generated image.
+
+=over
+
+=item background_colour
+
+The colour that the background of the image should be painted.
+Accepts a colour value (see L<Valid colour values>). Defaults to
+I<ddd>.
+
+=item font
+
+The font to use for the text in the image. Requires L<fontconfig>
+support in your L<GD> library. Defaults to I<Museo Sans>, which is
+available free from
+L<http://www.josbuivenga.demon.nl/museosans.html>.
+
+=item height
+
+The height of the image in pixels. Defaults to the same as C<width>.
+
+=item line_colour
+
+The colour that the border and cross lines should be painted in.
+Accepts either a colour value or C<none> to suppress them. Defaults
+to I<444>.
+
+=item size
+
+A text alternative to supplying C<width> and C<height> separately;
+of the form '300x250'.
+
+=item text
+
+The text to use across the image. Defaults to the size of the image,
+expressed in the form '300x250'.
+
+=item text_colour
+
+The colour that the text should be painted in. Accepts either a
+colour value or C<none> to suppress the text. Defaults to I<36f>.
+
+=item transparent
+
+Makes the background transparent.
+
+=item width
+
+The width of the image in pixels. Defaults to I<300>.
+
+=back
+
+
+=head2 Valid colour values
+
+Colour values are specified as the red, green and blue channels in
+hexadecimal, where C<00> is the least and C<FF> is the most. So black is
+C<000000> and white is C<FFFFFF>.
+
+CSS-style 3-character shorthand is also accepted where the three
+channels are repeating characters. So black is also C<000> and white
+C<FFF>.  All three values have to be repeating, so a value such as
+C<080808> cannot be shorted.
+
+
+=head1 SEE ALSO
+
+=over
+
+=item B<placeholder>
+
+command-line generator that uses this module.
+
+=item L<http://ima.gs/>
+
+hosted version of this module.
+
+=back
+
+=head1 AUTHOR
+
+Mark Norman Francis, L<norm@cackhanded.net>.
+
+=head1 COPYRIGHT AND LICENCE
+
+Copyright 2010 Mark Norman Francis.
+
+This library is free software; you can redistribute it and/or modify it
+under the same terms as Perl itself.
