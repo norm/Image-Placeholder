@@ -1,0 +1,11 @@
+Images:
+	- option to remove lines but keep border
+	- add support for rgba values to text/lines
+	- add support for CSS named colours
+	- add defined style "types" (such as blueprint: white on blue)
+Text:
+	- allow for wrapping of multiple words
+Pages:
+	- add decent 502 page
+Template:
+	- remove "museo sans" claim from hosted version
